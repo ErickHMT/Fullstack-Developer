@@ -1,0 +1,37 @@
+<h1>Novo pedido #12345678</h1>
+
+<!-- CLIENTE -->
+<section class="panel">
+    <h3 class="title-panel">Cliente</h3>
+    <input type="text" placeholder="Informe um cliente *">
+</section>
+
+<!-- CARRINHO -->
+<section class="panel">
+    <h3 class="title-panel">Carrinho</h3>
+    <input type="text" placeholder="Pesquise um produto">
+
+    <div class="carrinho-vazio">
+        <img class="img-carrinho-vazio" src="../../../assets/icones/imagem-carrinho-empty-state.png" alt="">
+        <p class="carrinho-vazio-title">Carrinho vazio</p>
+        <p class="carrinho-vazio-subtitle">Nenhum produto foi inserido</p>
+    </div>
+</section>
+
+<!-- TOTAL -->
+<section class="panel">
+    <h3 class="title-panel">Total</h3>
+
+    <div class="total-panel">
+        <div class="total-panel-column">
+            <label for="total-itens">Itens</label>
+            <span id="total-itens">R$ 0,00</span>
+            <hr />
+        </div>
+
+        <div class="total-panel-column">
+            <button class="btn btn-primary" type="submit">Finalizar pedido</button>
+            <button class="btn">Limpar carrinho</button>
+        </div>
+    </div>
+</section>

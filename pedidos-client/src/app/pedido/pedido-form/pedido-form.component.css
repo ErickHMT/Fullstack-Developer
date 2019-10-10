@@ -1,0 +1,33 @@
+.carrinho-vazio {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.img-carrinho-vazio {
+    width: 190px;
+}
+
+.carrinho-vazio-title {
+    font-size: 36px;
+    line-height: 24px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.carrinho-vazio-subtitle {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.total-panel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.total-panel-column {
+    box-sizing: border-box;
+    width: 50%;
+    padding: 10px;
+}
