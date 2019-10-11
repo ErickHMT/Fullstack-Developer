@@ -1,36 +1,74 @@
 nav {
-    position: relative;
-    margin: 0 auto;
-    padding: 8px 0;
+    /* position: relative; */
+    /* margin: 0 auto;
+    padding: 8px 0; */
     background: #FFF;
     font-size: 16px;
     border-radius: 4px;
 }
 
-#navbar-content {
-    width: 1319px;
-}
-
-/* @media only screen and (max-width: 1600px) {
-    #navbar-content { width: 50%; }
-} */
-
-ul {
-    margin: 0;
-}
-
-li {
-    list-style-type: none;
-    display: inline-block;
-    padding: 9px 25px;
-}
-
 #logo-maxima {
     width: 135px;
+    margin: 8px;
     float: left;
-    margin: 0 70px 0 60px;
 }
 
-a {
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 0 50px;
+    overflow: hidden;
+  }
+  
+li { 
+    float: left; 
+}
+  
+li a, .dropbtn {
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    padding: 17px 30px 17px 15px;
     text-decoration: none;
+}
+  
+  /* li a:hover, .dropdown:hover .dropbtn {
+    background-color: #CCC;
+  } */
+  
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 149px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    top: 40px;
+    z-index: 1;
+}
+  
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+  
+.dropdown-content a:hover {background-color: #CCC;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+/* MENU ICON */
+.menu-arrow-down {
+    position: absolute;
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    top: 23px;
+    margin-left: 10px;
 }
