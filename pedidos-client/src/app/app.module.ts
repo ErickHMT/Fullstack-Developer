@@ -1,20 +1,31 @@
+import { AppRoutingModule } from './app-routing.module';
+import { ClienteService } from './cliente/cliente.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './_navbar/navbar.component';
 import { PedidoFormComponent } from './pedido/pedido-form/pedido-form.component';
+import { PedidoConsultaComponent } from './pedido/pedido-consulta/pedido-consulta.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    PedidoFormComponent
+    PedidoFormComponent,
+    PedidoConsultaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ClienteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
