@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './_navbar/navbar.component';
 import { PedidoFormComponent } from './pedido/pedido-form/pedido-form.component';
 import { PedidoConsultaComponent } from './pedido/pedido-consulta/pedido-consulta.component';
+import { ProdutoService } from './produto/produto.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PedidoConsultaComponent } from './pedido/pedido-consulta/pedido-consult
     AppRoutingModule
   ],
   providers: [
-    ClienteService
+    ClienteService,
+    ProdutoService
   ],
   bootstrap: [AppComponent]
 })
