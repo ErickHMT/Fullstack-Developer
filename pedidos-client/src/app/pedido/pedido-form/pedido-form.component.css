@@ -1,3 +1,45 @@
+
+.panel {
+    width: 100%;
+    margin-bottom: 30px;
+    background: #FFF;
+    padding: 35px 37px;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+}
+
+.title-panel {
+    font-size: 22.75;
+    margin: 0 0 20px 30px;
+    color: #373A3C;
+}
+
+.input-container {
+    position: relative;
+}
+
+.btn-pesquisa {
+    position:absolute;
+    top: 7px;
+    border:none;
+    height:20px;
+    margin-left: -30px;
+}
+
+.btn-pesquisa:hover {
+    cursor: pointer;
+}
+
+.input-cliente {
+    width: 50%;
+    padding: 10px 20px 5px 20px;
+}
+
+.input-produto { 
+    width: 45%;
+    padding: 10px 20px 5px 20px;
+}
+
 .carrinho-vazio {
     width: 100%;
     margin: auto;
@@ -20,6 +62,12 @@
     color: rgba(0, 0, 0, 0.4);
 }
 
+hr {
+    /* margin: 20px 0; */
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
 .total-panel {
     display: flex;
     flex-direction: row;
@@ -31,3 +79,38 @@
     width: 50%;
     padding: 10px;
 }
+
+.label-value {
+    font-size: 20px;
+    line-height: 30px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.total-panel-value-container {
+    width: 100%;
+}
+
+.total-panel-value {
+    float: right;
+    font-size: 20px;
+}
+
+.btn {
+    width: 100%;
+    color: #000;
+    background: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    font-size: 20px;
+    padding: 13px;
+    margin: 10px;
+}
+
+.btn-primary {
+    margin-top: 0;
+    background: #5CB85C;
+    color: #FFF;
+}
+
+.btn:hover { background: #CCC }
+.btn-primary:hover { background: #457345;}

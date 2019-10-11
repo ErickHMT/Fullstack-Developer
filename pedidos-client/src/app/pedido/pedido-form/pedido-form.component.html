@@ -2,14 +2,28 @@
 
 <!-- CLIENTE -->
 <section class="panel">
-    <h3 class="title-panel">Cliente</h3>
-    <input type="text" placeholder="Informe um cliente *">
+    <h3 class="title-panel"><i class="icon icon-cliente"></i>Cliente</h3>
+
+    <div class="input-container">
+        <input type="text" class="input-cliente" placeholder="Informe um cliente *">
+        <span class="btn-pesquisa">
+            <i class="icon icon-pesquisa"></i>
+            <i class="icon icon-apagar"></i>
+        </span>
+    </div>
 </section>
 
 <!-- CARRINHO -->
 <section class="panel">
-    <h3 class="title-panel">Carrinho</h3>
-    <input type="text" placeholder="Pesquise um produto">
+    <h3 class="title-panel"><i class="icon icon-carrinho"></i>Carrinho</h3>
+
+    <div class="input-container">
+        <input type="text" class="input-produto" placeholder="Pesquise um produto">
+        <span class="btn-pesquisa">
+            <i class="icon icon-pesquisa"></i>
+            <i class="icon icon-apagar"></i>
+        </span>
+    </div>
 
     <div class="carrinho-vazio">
         <img class="img-carrinho-vazio" src="../../../assets/icones/imagem-carrinho-empty-state.png" alt="">
@@ -20,17 +34,31 @@
 
 <!-- TOTAL -->
 <section class="panel">
-    <h3 class="title-panel">Total</h3>
+    <h3 class="title-panel"><i class="icon icon-total"></i>Total</h3>
 
     <div class="total-panel">
+
         <div class="total-panel-column">
-            <label for="total-itens">Itens</label>
-            <span id="total-itens">R$ 0,00</span>
+            <div class="total-panel-value-container">
+                <label class="label-value" for="total-itens">Itens</label>
+                <span class="total-panel-value">R$ 0,00</span>
+            </div>
+
+            <div class="total-panel-value-container">
+                <label class="label-value" for="total-itens">Frete</label>
+                <span class="total-panel-value">R$ 0,00</span>
+            </div>
+
             <hr />
+
+            <div class="total-panel-value-container">
+                <label class="label-value" for="total-itens">Total</label>
+                <span class="total-panel-value">R$ 0,00</span>
+            </div>
         </div>
 
         <div class="total-panel-column">
-            <button class="btn btn-primary" type="submit">Finalizar pedido</button>
+            <button class="btn btn-primary" (click)="finalizarPedido()">Finalizar pedido</button>
             <button class="btn">Limpar carrinho</button>
         </div>
     </div>

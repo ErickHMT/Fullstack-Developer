@@ -12,4 +12,7 @@ export class PedidoFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  finalizarPedido() {
+    alert('finalizar');
+  }
 }
