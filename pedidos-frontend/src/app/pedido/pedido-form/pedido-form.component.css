@@ -152,17 +152,16 @@ hr {
 }
 
 .btn-apagar-produto {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* justify-content: center; */
     position: absolute;
     right: 30px;
     top: 50%;
     margin-top: -10px;
     background: none; 
     border: none;
-    /* transform: translate(0, -50%); */
     cursor: pointer;
+    width: 25px;
+    height: 25px;
+
 }
 
 .preco-produto {

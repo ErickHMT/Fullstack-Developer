@@ -36,10 +36,9 @@
             </ng-select>
         </div>
 
-        <hr />
         <div *ngFor="let produtoCarrinho of pc.controls; let i = index">
+            <hr *ngIf="i == 0" />
             <div class="product-card" [formGroup]="produtoCarrinho">
-                <!-- {{ produtoCarrinho.value.produto | json }} -->
                 <div>
                     <img src="https://via.placeholder.com/150" style="border-radius: 50%" class="product-image" alt="produto">
                     <div class="product-details">
@@ -57,9 +56,8 @@
                     <button class="btn-apagar-produto" title="Remover {{produtoCarrinho.value.produto.nome}}" (click)="removeProdutoCarrinho(produtoCarrinho.value.produto)"><i class="icon icon-apagar"></i></button>
                 </div>
             </div>
+            <hr />
         </div>
-
-        <hr />
 
         <div *ngIf="pc.controls.length === 0" class="carrinho-vazio">
             <img class="img-carrinho-vazio" src="../../../assets/icones/imagem-carrinho-empty-state.png" alt="">
