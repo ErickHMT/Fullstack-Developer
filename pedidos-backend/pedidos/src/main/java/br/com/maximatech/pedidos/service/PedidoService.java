@@ -1,7 +1,7 @@
 package br.com.maximatech.pedidos.service;
 
-import br.com.maximatech.pedidos.model.Pedido;
-import br.com.maximatech.pedidos.repository.PedidoRepository;
+import br.com.maximatech.core.model.Pedido;
+import br.com.maximatech.core.repository.PedidoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
