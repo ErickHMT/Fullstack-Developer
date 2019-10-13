@@ -16,14 +16,6 @@
                 placeholder="Informe um cliente *"
                 formControlName="nome">
             </ng-select>
-            <!-- <select type="text" class="input-cliente">
-                    <option value="" selected hidden>Informe um cliente *</option>
-                    <option *ngFor="let cliente of clientes">{{cliente.nome}}</option>
-            </select>  -->
-            <!-- <span class="btn-pesquisa">
-                <i class="icon icon-pesquisa" *ngIf="!isclienteSelecionado"></i>
-                <i class="icon icon-apagar" *ngIf="isclienteSelecionado"></i>
-            </span> -->
         </div>
     </form>
 </section>
@@ -32,7 +24,7 @@
 <section class="panel">
     <h2 class="title-panel"><i class="icon icon-carrinho"></i>Carrinho</h2>
 
-    <form [formGroup]="produtoForm" novalidate>
+    <form [formGroup]="produtosForm" novalidate>
         <div class="input-container">
             <ng-select class="input-produto" [items]="produtos"
                 #produtoSelecionado
@@ -40,46 +32,41 @@
                 bindLabel="nome"
                 (ngModelChange)="addProdutoCarrinho(produtoSelecionado)"
                 placeholder="Pesquise um produto"
-                formControlName="produto">
+                formControlName="produtos">
             </ng-select>
+        </div>
 
-            <!-- <select type="text" class="input-produto">
-                <option selected hidden>Pesquise um produto</option>
-                <option *ngFor="let produto of produtos">{{produto.nome}}</option>
-            </select>
-            <span class="btn-pesquisa">
-                <i class="icon icon-pesquisa"></i>
-                <i class="icon icon-apagar"></i>
-            </span> -->
+        <hr />
+        <div *ngFor="let produtoCarrinho of pc.controls; let i = index">
+            <div class="product-card" [formGroup]="produtoCarrinho">
+                <!-- {{ produtoCarrinho.value.produto | json }} -->
+                <div>
+                    <img src="https://via.placeholder.com/150" style="border-radius: 50%" class="product-image" alt="produto">
+                    <div class="product-details">
+                        <p>{{ produtoCarrinho.value.produto.codigo }}</p>
+                        <h3>{{ produtoCarrinho.value.produto.nome }}</h3>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="product-prices">
+                        <span><input type="number" value="1" formControlName="quantidade" style="width: 50px;"> 
+                            x {{produtoCarrinho.value.produto.precoUnitario | currency:'BRL' }}</span>
+                        <p class="preco-produto">R$ 00,00</p>
+                    </div>
+                    <button class="btn-apagar-produto" title="Remover {{produtoCarrinho.value.produto.nome}}" (click)="removeProdutoCarrinho(produtoCarrinho.value.produto)"><i class="icon icon-apagar"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div *ngIf="pc.controls.length === 0" class="carrinho-vazio">
+            <img class="img-carrinho-vazio" src="../../../assets/icones/imagem-carrinho-empty-state.png" alt="">
+            <p class="carrinho-vazio-title">Carrinho vazio</p>
+            <p class="carrinho-vazio-subtitle">Nenhum produto foi inserido</p>
         </div>
     </form>
-
-    <hr />
-    <div class="product-card" *ngFor="let produtoCarrinho of produtosCarrinho">
-        <div>
-            <img src="https://via.placeholder.com/150" style="border-radius: 50%" class="product-image" alt="produto">
-            <div class="product-details">
-                <p>{{ produtoCarrinho.produto.codigo }}</p>
-                <h3>{{ produtoCarrinho.produto.nome }}</h3>
-            </div>
-        </div>
-
-        <div>
-            <div class="product-prices">
-                <span><input type="number" value="1" style="width: 50px;"> 
-                    x {{ produtoCarrinho.produto.precoUnitario | currency:'BRL':true:'1.2-2' }}</span>
-                <p class="preco-produto">R$ 00,00</p>
-            </div>
-            <button class="btn-apagar-produto" title="Remover {{produtoCarrinho.produto.nome}}" (click)="removeProdutoCarrinho(produtoCarrinho.produto)"><i class="icon icon-apagar"></i></button>
-        </div>
-    </div>
-    <hr />
-
-    <div *ngIf="produtosCarrinho.length === 0" class="carrinho-vazio">
-        <img class="img-carrinho-vazio" src="../../../assets/icones/imagem-carrinho-empty-state.png" alt="">
-        <p class="carrinho-vazio-title">Carrinho vazio</p>
-        <p class="carrinho-vazio-subtitle">Nenhum produto foi inserido</p>
-    </div>
 </section>
 
 <!-- TOTAL -->
@@ -91,12 +78,12 @@
         <div class="total-panel-column">
             <div class="total-panel-value-container">
                 <label class="label-value" for="total-itens">Itens</label>
-                <span class="total-panel-value">R$ 0,00</span>
+                <span class="total-panel-value">{{ calculaValorItensCarrinho() | currency:'BRL' }}</span>
             </div>
 
             <div class="total-panel-value-container">
                 <label class="label-value" for="total-itens">Frete</label>
-                <span class="total-panel-value">R$ 0,00</span>
+                <span class="total-panel-value">{{ getValorFrete() | currency:'BRL' }}</span>
             </div>
 
             <hr />

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { NgSelectComponent } from '@ng-select/ng-select';
 
 import { ClienteService } from 'src/app/cliente/cliente.service';
@@ -18,13 +18,11 @@ export class PedidoFormComponent implements OnInit {
 
   clientes: Cliente[] = [];
   produtos: Produto[] = [];
-
   produtosCarrinho: ProdutoCarrinho[] = [];
+  clienteSelecionado: Cliente;
 
   clienteForm: FormGroup;
-  produtoForm: FormGroup;
-
-  clienteSelecionado: Cliente;
+  produtosForm: FormGroup;
 
   constructor(
     private clienteService: ClienteService,
@@ -37,56 +35,12 @@ export class PedidoFormComponent implements OnInit {
       nome: [null, Validators.required]
     });
 
-    this.produtoForm = this.fb.group({
-      produto: [null, Validators.required],
+    this.produtosForm = this.fb.group({
+      produtos: [null, Validators.required],
+      produtosCarrinho: new FormArray([])
     });
 
     this.carregarInformacoes();
-  }
-
-  selecionarCliente(clienteSelecionado: NgSelectComponent) {
-    clienteSelecionado.selectedItems.length === 0
-      ? this.clienteSelecionado = null
-      : this.clienteSelecionado = new Cliente(clienteSelecionado.selectedItems[0].value);
-  }
-
-  addProdutoCarrinho(select: NgSelectComponent) {
-    const produtoSelecionado = select.selectedItems[0];
-
-    const produto = new Produto(produtoSelecionado.value);
-    const produtoCarrinho = new ProdutoCarrinho(produto, 1);
-
-    select.selectedItems.length = 0;
-    // this.produtos = this.produtos.filter( (ab, index) => ab.codigo !== produto.codigo );
-    this.produtosCarrinho.push(produtoCarrinho);
-  }
-
-  removeProdutoCarrinho(produto) {
-    const codigoProduto = produto.codigo;
-    // this.produtos.push(produto);
-
-    this.produtosCarrinho = this.produtosCarrinho.filter(produtoCarrinho =>
-      produtoCarrinho.produto.codigo !== codigoProduto
-    );
-  }
-
-  finalizarPedido() {
-    if (!this.clienteSelecionado) {
-      alert('Selecione um cliente!!');
-      return;
-    }
-
-    const produtosCarrinho = this.produtosCarrinho;
-    if (produtosCarrinho || produtosCarrinho.length === 0) {
-      alert('Adicione um item ao carrinho');
-      return;
-    }
-
-    alert('Adicionando pedido');
-  }
-
-  limparCarrinho() {
-    this.produtosCarrinho = [];
   }
 
   carregarInformacoes() {
@@ -99,4 +53,67 @@ export class PedidoFormComponent implements OnInit {
       this.produtos = produtos.map(produto => new Produto(produto));
     });
   }
+
+  // getters para acesso ao form
+  get f() { return this.produtosForm.controls; }
+  get pc() { return this.f.produtosCarrinho as FormArray; }
+
+  selecionarCliente(clienteSelecionado: NgSelectComponent) {
+    clienteSelecionado.selectedItems.length === 0
+      ? this.clienteSelecionado = null
+      : this.clienteSelecionado = new Cliente(clienteSelecionado.selectedItems[0].value);
+  }
+
+  addProdutoCarrinho(select: NgSelectComponent) {
+    const produtoSelecionado = select.selectedItems[0].value;
+    const produto = new Produto(produtoSelecionado);
+    const produtoCarrinho = new ProdutoCarrinho(produto, 1);
+
+    this.pc.push(this.fb.group({
+      produto: [produtoSelecionado],
+      quantidade: [1, [Validators.required]]
+    }));
+
+    select.selectedItems.length = 0;
+    this.produtosCarrinho.push(produtoCarrinho);
+  }
+
+  removeProdutoCarrinho(produto) {
+    const codigoProduto = produto.codigo;
+    // this.produtos.push(produto);
+    this.pc.removeAt(this.pc.value.findIndex(p => p.produto.codigo === codigoProduto));
+    this.calculaValorItensCarrinho();
+  }
+
+  finalizarPedido() {
+    if (!this.clienteSelecionado) {
+      alert('Selecione um cliente!!');
+      return;
+    }
+
+    const produtosCarrinho = this.produtosCarrinho;
+    if (!produtosCarrinho || produtosCarrinho.length === 0) {
+      alert('Adicione um item ao carrinho');
+      return;
+    }
+
+    JSON.stringify(this.produtosForm.value);
+    alert('Adicionando pedido');
+  }
+
+  limparCarrinho() {
+    this.produtosCarrinho = [];
+  }
+
+  calculaValorItensCarrinho() {
+    let total = 0;
+    this.pc.controls.forEach(produtoCarrinho => total += produtoCarrinho.value.quantidade * produtoCarrinho.value.produto.precoUnitario);
+    return total;
+  }
+
+  getValorFrete() {
+    // TODO buscar valor do frete;
+    return 0;
+  }
+
 }
