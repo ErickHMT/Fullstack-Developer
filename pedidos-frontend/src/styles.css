@@ -1,7 +1,9 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 @font-face {
     font-family: 'EuclidCircularB';
     src: url('./assets/fontes/EuclidCircularB-Medium.otf');
-  }
+}
 
 * {
     box-sizing: border-box;
@@ -41,6 +43,14 @@ h1 {
     margin: 0 0 20px 30px;
     color: #373A3C;
 }
+
+
+/* TODO ALTERAR ESTILO SELECTS PARA ICONES PERSONALIZADOS */
+/* .ng-arrow-wrapper {
+    width: 20px;
+    height: 20px;
+    background: red !important ;
+} */
 
 input {
     border: 1px solid #CCC;

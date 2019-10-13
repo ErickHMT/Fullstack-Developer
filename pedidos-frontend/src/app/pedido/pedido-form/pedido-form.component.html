@@ -4,59 +4,82 @@
 <section class="panel">
     <h2 class="title-panel"><i class="icon icon-cliente"></i>Cliente</h2>
 
-    <div class="input-container">
-        <select type="text" class="input-cliente">
-                <option value="" selected hidden>Informe um cliente *</option>
-                <option *ngFor="let cliente of clientes">{{cliente.nome}}</option>
-        </select>
-        <span class="btn-pesquisa">
-            <i class="icon icon-pesquisa" *ngIf="!isclienteSelecionado"></i>
-            <i class="icon icon-apagar" *ngIf="isclienteSelecionado"></i>
-        </span>
-    </div>
+    <form [formGroup]="clienteForm" novalidate>
+        <div class="input-container">
+            <ng-select class="input-cliente"  [items]="clientes"
+                #clienteSelecionado
+                [selectOnTab]="true"
+                bindValue="nome"
+                bindLabel="nome"
+                labelForId="cliente"
+                (ngModelChange)="selecionarCliente(clienteSelecionado)"
+                placeholder="Informe um cliente *"
+                formControlName="nome">
+            </ng-select>
+            <!-- <select type="text" class="input-cliente">
+                    <option value="" selected hidden>Informe um cliente *</option>
+                    <option *ngFor="let cliente of clientes">{{cliente.nome}}</option>
+            </select>  -->
+            <!-- <span class="btn-pesquisa">
+                <i class="icon icon-pesquisa" *ngIf="!isclienteSelecionado"></i>
+                <i class="icon icon-apagar" *ngIf="isclienteSelecionado"></i>
+            </span> -->
+        </div>
+    </form>
 </section>
 
 <!-- CARRINHO -->
 <section class="panel">
     <h2 class="title-panel"><i class="icon icon-carrinho"></i>Carrinho</h2>
 
-    <div class="input-container">
-        <select type="text" class="input-produto">
-            <option selected hidden>Pesquise um produto</option>
-            <option *ngFor="let produto of produtos">{{produto.nome}}</option>
-        </select>
-        
-        <span class="btn-pesquisa">
-            <i class="icon icon-pesquisa"></i>
-            <i class="icon icon-apagar"></i>
-        </span>
-    </div>
+    <form [formGroup]="produtoForm" novalidate>
+        <div class="input-container">
+            <ng-select class="input-produto" [items]="produtos"
+                #produtoSelecionado
+                [selectOnTab]="true"
+                bindLabel="nome"
+                (ngModelChange)="addProdutoCarrinho(produtoSelecionado)"
+                placeholder="Pesquise um produto"
+                formControlName="produto">
+            </ng-select>
+
+            <!-- <select type="text" class="input-produto">
+                <option selected hidden>Pesquise um produto</option>
+                <option *ngFor="let produto of produtos">{{produto.nome}}</option>
+            </select>
+            <span class="btn-pesquisa">
+                <i class="icon icon-pesquisa"></i>
+                <i class="icon icon-apagar"></i>
+            </span> -->
+        </div>
+    </form>
 
     <hr />
-    <div class="product-card">
+    <div class="product-card" *ngFor="let produtoCarrinho of produtosCarrinho">
         <div>
-            <img src="../../../assets/icones/foto-fanta.png" class="product-image" alt="produto">
+            <img src="https://via.placeholder.com/150" style="border-radius: 50%" class="product-image" alt="produto">
             <div class="product-details">
-                <p>8689</p>
-                <h3>Fardo 6UN Coca-Cola 600ml</h3>
+                <p>{{ produtoCarrinho.produto.codigo }}</p>
+                <h3>{{ produtoCarrinho.produto.nome }}</h3>
             </div>
         </div>
 
         <div>
             <div class="product-prices">
-                <span><input type="number" style="width: 50px;"> x R$ 17,34</span>
-                <p class="preco-produto">R$ 66,56</p>
+                <span><input type="number" value="1" style="width: 50px;"> 
+                    x {{ produtoCarrinho.produto.precoUnitario | currency:'BRL':true:'1.2-2' }}</span>
+                <p class="preco-produto">R$ 00,00</p>
             </div>
-            <span class="btn-apagar-produto"><i class="icon icon-apagar"></i></span>
+            <button class="btn-apagar-produto" title="Remover {{produtoCarrinho.produto.nome}}" (click)="removeProdutoCarrinho(produtoCarrinho.produto)"><i class="icon icon-apagar"></i></button>
         </div>
     </div>
     <hr />
 
-    <!-- <div class="carrinho-vazio">
+    <div *ngIf="produtosCarrinho.length === 0" class="carrinho-vazio">
         <img class="img-carrinho-vazio" src="../../../assets/icones/imagem-carrinho-empty-state.png" alt="">
         <p class="carrinho-vazio-title">Carrinho vazio</p>
         <p class="carrinho-vazio-subtitle">Nenhum produto foi inserido</p>
-    </div> -->
+    </div>
 </section>
 
 <!-- TOTAL -->
@@ -86,7 +109,7 @@
 
         <div class="total-panel-column">
             <button class="btn btn-primary" (click)="finalizarPedido()">Finalizar pedido</button>
-            <button class="btn">Limpar carrinho</button>
+            <button class="btn" (click)="limparCarrinho()">Limpar carrinho</button>
         </div>
     </div>
 </section>

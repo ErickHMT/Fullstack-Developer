@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
+import { NgSelectModule } from '@ng-select/ng-select';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './_navbar/navbar.component';
 import { PedidoFormComponent } from './pedido/pedido-form/pedido-form.component';
@@ -22,7 +24,8 @@ import { ProdutoService } from './produto/produto.service';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgSelectModule,
   ],
   providers: [
     ClienteService,
