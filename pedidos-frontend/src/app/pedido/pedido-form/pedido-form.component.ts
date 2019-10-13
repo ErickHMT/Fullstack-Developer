@@ -107,13 +107,16 @@ export class PedidoFormComponent implements OnInit {
 
   calculaValorItensCarrinho() {
     let total = 0;
-    this.pc.controls.forEach(produtoCarrinho => total += produtoCarrinho.value.quantidade * produtoCarrinho.value.produto.precoUnitario);
+    this.pc.controls.forEach(produtoCarrinho => total += this.getPrecoProduto(produtoCarrinho.value));
     return total;
+  }
+
+  getPrecoProduto(produtoCarrinho) {
+    return produtoCarrinho.produto.precoUnitario * produtoCarrinho.quantidade;;
   }
 
   getValorFrete() {
     // TODO buscar valor do frete;
     return 0;
   }
-
 }

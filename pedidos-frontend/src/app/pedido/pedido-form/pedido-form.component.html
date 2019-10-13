@@ -51,7 +51,7 @@
                     <div class="product-prices">
                         <span><input type="number" value="1" formControlName="quantidade" style="width: 50px;"> 
                             x {{produtoCarrinho.value.produto.precoUnitario | currency:'BRL' }}</span>
-                        <p class="preco-produto">R$ 00,00</p>
+                        <p class="preco-produto">{{ getPrecoProduto(produtoCarrinho.value) | currency:'BRL'  }}</p>
                     </div>
                     <button class="btn-apagar-produto" title="Remover {{produtoCarrinho.value.produto.nome}}" (click)="removeProdutoCarrinho(produtoCarrinho.value.produto)"><i class="icon icon-apagar"></i></button>
                 </div>
