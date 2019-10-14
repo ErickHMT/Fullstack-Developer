@@ -10,11 +10,11 @@
             <th>Quant. de itens</th>
             <th>Valor do frete</th>
         </tr>
-        <tr>
-            <td>12345678</td>
-            <td>R$ 1.364,32</td>
-            <td>8</td>
-            <td>12,00</td>
+        <tr *ngFor="let pedido of pedidos">
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.valorTotal | currency:'BRL' }}</td>
+            <td>{{ pedido.qtdItens }}</td>
+            <td>{{ pedido.valorFrete | currency:'BRL' }}</td>
         </tr>
     </table>
 
