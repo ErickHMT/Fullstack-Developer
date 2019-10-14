@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -13,13 +15,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "PEDIDOS")
-public class Pedido {
+public class Pedido implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-//    private Cliente cliente;
-    @Column(name = "QTD_ITENS")
     private Integer qtdItens;
+    private BigDecimal valorFrete;
+    private BigDecimal valorTotal;
 }

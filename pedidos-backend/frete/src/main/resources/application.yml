@@ -11,19 +11,6 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
 
-#spring:
-#  application:
-#    name: frete
-#  jpa:
-#    show-sql: false
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#  jmx:
-#    enabled: false
-#  datasource:
-#    url: jdbc:postgresql://127.0.0.1:5432/maximatech?sslMode=DISABLED
-#    username: root
-#    password: example
+spring:
+  application:
+    name: frete

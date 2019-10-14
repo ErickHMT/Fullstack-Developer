@@ -13,13 +13,14 @@ import java.math.BigDecimal;
 @RestController
 @RequestMapping("/admin/frete")
 @Slf4j
+@CrossOrigin(origins = "*")
 public class FreteController {
 
     @Autowired
     private FreteService freteService;
 
     @GetMapping(value = "/{qtdItens}")
-    public ResponseEntity<?> findAll(@PathVariable Integer qtdItens) {
+    public ResponseEntity<?> getValorFrete(@PathVariable Integer qtdItens) {
         BigDecimal valorFrete = freteService.calculaFrete(qtdItens);
         return new ResponseEntity<>(new FreteDto(valorFrete), HttpStatus.OK);
     }

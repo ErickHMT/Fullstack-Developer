@@ -12,6 +12,9 @@ public class FreteService {
     public static final int MIN = 5;
 
     public BigDecimal calculaFrete(Integer qtdItens) {
+        if(qtdItens == 0)
+            return BigDecimal.ZERO;
+
         return getValorFrete().multiply(new BigDecimal(qtdItens));
     }
 
