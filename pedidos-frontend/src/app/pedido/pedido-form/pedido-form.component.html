@@ -30,6 +30,7 @@
                 #produtoSelecionado
                 [selectOnTab]="true"
                 bindLabel="nome"
+                [clearSearchOnAdd]="true"
                 (ngModelChange)="addProdutoCarrinho(produtoSelecionado)"
                 placeholder="Pesquise um produto"
                 formControlName="produtos">
@@ -49,7 +50,7 @@
 
                 <div>
                     <div class="product-prices">
-                        <span><input type="number" value="1" formControlName="quantidade" style="width: 50px;"> 
+                        <span><input type="number" value="1" formControlName="quantidade" (change)="atualizaValorFrete()" style="width: 50px;">
                             x {{produtoCarrinho.value.produto.precoUnitario | currency:'BRL' }}</span>
                         <p class="preco-produto">{{ getPrecoProduto(produtoCarrinho.value) | currency:'BRL'  }}</p>
                     </div>
@@ -81,14 +82,14 @@
 
             <div class="total-panel-value-container">
                 <label class="label-value" for="total-itens">Frete</label>
-                <span class="total-panel-value">{{ getValorFrete() | currency:'BRL' }}</span>
+                <span class="total-panel-value">{{ valorFrete | currency:'BRL' }}</span>
             </div>
 
             <hr />
 
             <div class="total-panel-value-container">
                 <label class="label-value" for="total-itens">Total</label>
-                <span class="total-panel-value">R$ 0,00</span>
+                <span class="total-panel-value">{{ calculaValorTotal() | currency:'BRL' }}</span>
             </div>
         </div>
 

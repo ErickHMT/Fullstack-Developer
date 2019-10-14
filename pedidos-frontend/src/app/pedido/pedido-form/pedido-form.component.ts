@@ -8,6 +8,9 @@ import { ProdutoService } from 'src/app/produto/produto.service';
 import { Cliente } from 'src/app/cliente/cliente';
 import { Produto } from 'src/app/produto/produto';
 import { ProdutoCarrinho } from 'src/app/produto-carrinho/produto-carrinho';
+import { PedidoService } from '../pedido.service';
+import { FreteService } from './../../frete/frete.service';
+import { Pedido } from '../pedido';
 
 @Component({
   selector: 'app-pedido-form',
@@ -24,9 +27,13 @@ export class PedidoFormComponent implements OnInit {
   clienteForm: FormGroup;
   produtosForm: FormGroup;
 
+  valorFrete = 0;
+
   constructor(
     private clienteService: ClienteService,
     private produtoService: ProdutoService,
+    private freteService: FreteService,
+    private pedidoService: PedidoService,
     public fb: FormBuilder
     ) { }
 
@@ -49,8 +56,7 @@ export class PedidoFormComponent implements OnInit {
     });
 
     this.produtoService.findAll().subscribe(data => {
-      const produtos = data['produtos'];
-      this.produtos = produtos.map(produto => new Produto(produto));
+      this.produtos = data['produtos'];
     });
   }
 
@@ -76,13 +82,14 @@ export class PedidoFormComponent implements OnInit {
 
     select.selectedItems.length = 0;
     this.produtosCarrinho.push(produtoCarrinho);
+    this.atualizaValorFrete();
   }
 
   removeProdutoCarrinho(produto) {
     const codigoProduto = produto.codigo;
-    // this.produtos.push(produto);
     this.pc.removeAt(this.pc.value.findIndex(p => p.produto.codigo === codigoProduto));
     this.calculaValorItensCarrinho();
+    this.atualizaValorFrete();
   }
 
   finalizarPedido() {
@@ -91,32 +98,52 @@ export class PedidoFormComponent implements OnInit {
       return;
     }
 
-    const produtosCarrinho = this.produtosCarrinho;
+    const produtosCarrinho = this.pc.controls;
     if (!produtosCarrinho || produtosCarrinho.length === 0) {
       alert('Adicione um item ao carrinho');
       return;
     }
 
-    JSON.stringify(this.produtosForm.value);
-    alert('Adicionando pedido');
+    const pedido = new Pedido(this.qtdProdutosCarrinho, this.valorFrete, this.calculaValorTotal());
+    this.pedidoService.salvar(pedido).subscribe(data => {
+      this.limparCarrinho();
+      alert('Salvo com sucesso! ' + JSON.stringify(data));
+    }, err =>
+      alert('Falha ao salvar pedido')
+    );
   }
 
   limparCarrinho() {
-    this.produtosCarrinho = [];
+    for (let i = this.pc.controls.length; i >= 0; i--) {
+      this.pc.removeAt(i);
+    }
+    this.atualizaValorFrete();
   }
 
   calculaValorItensCarrinho() {
     let total = 0;
     this.pc.controls.forEach(produtoCarrinho => total += this.getPrecoProduto(produtoCarrinho.value));
+
     return total;
   }
 
   getPrecoProduto(produtoCarrinho) {
-    return produtoCarrinho.produto.precoUnitario * produtoCarrinho.quantidade;;
+    return produtoCarrinho.produto.precoUnitario * produtoCarrinho.quantidade;
   }
 
-  getValorFrete() {
-    // TODO buscar valor do frete;
-    return 0;
+  calculaValorTotal() {
+    return this.calculaValorItensCarrinho() + this.valorFrete;
+  }
+
+  atualizaValorFrete() {
+    let qtdProdutos = this.qtdProdutosCarrinho;
+    console.log('----------QTD PRODUTOS: ', qtdProdutos);
+    this.freteService.getValorFrete(qtdProdutos).subscribe(data => this.valorFrete = data['valorFrete']);
+  }
+
+  get qtdProdutosCarrinho() {
+    let qtdProdutos = 0;
+    this.pc.controls.forEach(produtoCarrinho => qtdProdutos += produtoCarrinho.value.quantidade);
+    return qtdProdutos;
   }
 }

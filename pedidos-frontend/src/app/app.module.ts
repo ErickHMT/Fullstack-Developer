@@ -1,3 +1,4 @@
+import { FreteService } from './frete/frete.service';
 import { AppRoutingModule } from './app-routing.module';
 import { ClienteService } from './cliente/cliente.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +13,7 @@ import { NavbarComponent } from './_navbar/navbar.component';
 import { PedidoFormComponent } from './pedido/pedido-form/pedido-form.component';
 import { PedidoConsultaComponent } from './pedido/pedido-consulta/pedido-consulta.component';
 import { ProdutoService } from './produto/produto.service';
+import { PedidoService } from './pedido/pedido.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ProdutoService } from './produto/produto.service';
   ],
   providers: [
     ClienteService,
-    ProdutoService
+    ProdutoService,
+    FreteService,
+    PedidoService,
   ],
   bootstrap: [AppComponent]
 })
