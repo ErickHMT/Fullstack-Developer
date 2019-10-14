@@ -16,6 +16,7 @@
 
     <modules>
         <module>pedidos</module>
+        <module>frete</module>
         <module>core</module>
     </modules>
 
