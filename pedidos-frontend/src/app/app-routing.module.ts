@@ -8,14 +8,13 @@ const appRoutes: Routes = [
     { path: 'pedido/novo', component: PedidoFormComponent },
     { path: 'pedido/list', component: PedidoConsultaComponent },
     { path: '', redirectTo: '/pedido/novo', pathMatch: 'full' },
-    // { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
     imports: [
         RouterModule.forRoot(
             appRoutes,
-            { enableTracing: true } // <-- debugging purposes only
+            { enableTracing: true }
         )
     ],
     exports: [

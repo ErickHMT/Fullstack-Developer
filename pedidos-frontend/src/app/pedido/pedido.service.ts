@@ -1,3 +1,4 @@
+import { URL } from './../api';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -9,13 +10,11 @@ import { Pedido } from './pedido';
 })
 export class PedidoService {
 
-  private url = 'http://localhost:8082';
-
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Pedido[]> {
     return this.http
-      .get<Pedido[]>(`${this.url}/admin/pedidos`);
+      .get<Pedido[]>(`${URL}/pedidos`);
   }
 
   salvar(pedido: Pedido): Observable<Pedido> {
@@ -26,7 +25,7 @@ export class PedidoService {
     };
 
     return this.http
-      .post<Pedido>(`${this.url}/admin/pedidos`, JSON.stringify(pedido), httpOptions);
+      .post<Pedido>(`${URL}/pedidos`, JSON.stringify(pedido), httpOptions);
   }
 
 }

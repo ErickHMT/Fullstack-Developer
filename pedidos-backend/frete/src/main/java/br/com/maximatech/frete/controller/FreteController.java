@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("/admin/frete")
+@RequestMapping("/")
 @Slf4j
 @CrossOrigin(origins = "*")
 public class FreteController {

@@ -15,7 +15,7 @@ import java.util.List;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/admin/pedidos")
+@RequestMapping("/")
 @Slf4j
 @CrossOrigin(origins = "*")
 public class PedidoController {
