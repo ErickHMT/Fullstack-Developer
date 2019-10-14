@@ -37,7 +37,7 @@ docker-compose -f stack.yml up
 mvn spring-boot:run
 ```
 2. Execute o comando `npm install` na pasta pedidos-frontend para baixar as dependências.
-3. Para rodar a aplicação Angular utilizar o comando `ng s` ou `npm start` na pasta pedidos-frontend.
+3. Para rodar a aplicação Angular utilizar o comando `ng s` ou `npm start`.
 
 **GET Request -> Dados do Cliente e Produtos**
 
