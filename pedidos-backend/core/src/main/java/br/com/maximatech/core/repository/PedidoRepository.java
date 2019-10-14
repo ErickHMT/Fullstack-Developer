@@ -1,6 +1,6 @@
-package br.com.maximatech.pedidos.repository;
+package br.com.maximatech.core.repository;
 
-import br.com.maximatech.pedidos.model.Pedido;
+import br.com.maximatech.core.model.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

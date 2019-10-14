@@ -7,13 +7,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="discovery" />
-        <module name="pedidos" />
+        <module name="auth" />
         <module name="gateway" />
+        <module name="core" />
+        <module name="frete" />
+        <module name="pedidos" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="core" target="11" />
+      <module name="auth" target="11" />
+      <module name="core" target="1.8" />
+      <module name="core (1)" target="1.8" />
       <module name="discovery" target="11" />
+      <module name="frete" target="11" />
       <module name="gateway" target="11" />
       <module name="pedidos" target="11" />
       <module name="pedidos-backend" target="1.8" />
@@ -21,8 +27,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="auth" options="-parameters" />
       <module name="core" options="-parameters" />
+      <module name="core (1)" options="-parameters" />
       <module name="discovery" options="-parameters" />
+      <module name="frete" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="pedidos" options="-parameters" />
     </option>

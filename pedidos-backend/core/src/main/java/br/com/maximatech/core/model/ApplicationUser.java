@@ -12,14 +12,13 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "PEDIDOS")
-public class Pedido {
+public class ApplicationUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    private Cliente cliente;
-    @Column(name = "QTD_ITENS")
-    private Integer qtdItens;
+    private String username;
+
+    private String password;
 }

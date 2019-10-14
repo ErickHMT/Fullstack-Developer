@@ -1,4 +1,4 @@
-package br.com.maximatech.pedidos.model;
+package br.com.maximatech.core.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
